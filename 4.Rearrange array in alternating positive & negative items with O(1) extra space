@@ -1,0 +1,36 @@
+QUESTION LINK = https://www.geeksforgeeks.org/rearrange-array-alternating-positive-negative-items-o1-extra-space/
+
+// t(n) = O(nlogn),S(n) = O(1)
+
+void altNegPos(vector<int>& v, int n){
+    sort(v.begin(), v.end());
+    int cnt = 0;
+    for(int i=0; i<n; i++){
+        if(v[i]>=0)
+            break;
+        cnt++;
+    }
+    int i=1;
+    int t = cnt;
+    if(cnt%2){
+        while(i<cnt){
+            swap(v[i],v[t+i]);
+            i+=2;
+        }
+    }
+    else{
+        while(i<cnt){
+            swap(v[i],v[t]);
+            i+=2;t+=2;
+        }
+    }
+}
+
+int main(){
+    vector<int>v = {-5, -2, 5, 2, 4, -8, -9, -3, 7};
+    int n = v.size();
+    altNegPos(v, n);
+    for(auto val: v)
+        cout<<val<<" ";
+    return 0;
+}
